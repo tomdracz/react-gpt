@@ -749,4 +749,19 @@ describe("Bling", () => {
         instance.componentWillUnmount();
         expect(Bling._adManager.getMountedInstances()).to.have.length(0);
     });
+
+    it("does not call props.onSlotLoaded if it has been unmounted", () => {
+        const onScriptLoaded = sinon.stub();
+        const instance = ReactTestUtils.renderIntoDocument(
+            <Bling
+                adUnitPath="/4595/nfl.test.open"
+                slotSize={[300, 250]}
+                onScriptLoaded={onScriptLoaded}
+            />
+        );
+        onScriptLoaded.reset();
+        instance.componentWillUnmount();
+        instance.onScriptLoaded();
+        expect(onScriptLoaded.called).to.be.false;
+    });
 });
