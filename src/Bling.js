@@ -534,13 +534,15 @@ class Bling extends Component {
 
     defineSizeMapping(adSlot, sizeMapping) {
         if (sizeMapping) {
-            Bling._adManager.addMQListener(this, this.props);
-            const sizeMappingArray = sizeMapping
-                .reduce((mapping, size) => {
-                    return mapping.addSize(size.viewport, size.slot);
-                }, Bling._adManager.googletag.sizeMapping())
-                .build();
-            adSlot.defineSizeMapping(sizeMappingArray);
+            Bling._adManager.googletag.cmd.push(() => {
+                Bling._adManager.addMQListener(this, this.props);
+                const sizeMappingArray = sizeMapping
+                    .reduce((mapping, size) => {
+                        return mapping.addSize(size.viewport, size.slot);
+                    }, Bling._adManager.googletag.sizeMapping())
+                    .build();
+                adSlot.defineSizeMapping(sizeMappingArray);
+            });
         }
     }
 
