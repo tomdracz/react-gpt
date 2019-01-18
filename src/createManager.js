@@ -459,8 +459,14 @@ export class AdManager extends EventEmitter {
         if (!this.pubadsReady) {
             return false;
         }
-        this.googletag.pubads().updateCorrelator();
-
+        // Note, `updateCorrelator` has been deprecated. This is a short-term patch
+        // to ensure the method will not be called when it is removed from GPT.
+        // A better fix to come...
+        if ("updateCorrelator" in this.googletag.pubads()) {
+            this.googletag.pubads().updateCorrelator();
+        } else {
+            console.warn("Ad: `updateCorrelator` has been removed from GPT");
+        }
         return true;
     }
 
