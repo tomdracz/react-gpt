@@ -433,22 +433,12 @@ class Bling extends Component {
 
         if (shouldRefresh) {
             this.configureSlot(this._adSlot, nextProps);
+            this.refresh();
+            return false;
         }
 
-        if (Bling._adManager._syncCorrelator) {
-            if (shouldRefresh) {
-                Bling._adManager.refresh();
-            } else if (shouldRender || isScriptLoaded) {
-                Bling._adManager.renderAll();
-            }
-        } else {
-            if (shouldRefresh) {
-                this.refresh();
-                return false;
-            }
-            if (shouldRender || isScriptLoaded) {
-                return true;
-            }
+        if (shouldRender || isScriptLoaded) {
+            return true;
         }
 
         return false;
