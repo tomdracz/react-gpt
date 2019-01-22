@@ -1,3 +1,16 @@
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/apartmenttherapy/react-gpt/compare/v2.0.1...v2.0.2) (2019-01-22)
+
+
+### Bug Fixes
+
+* Do not refresh all ads when new component loads ([#8](https://github.com/apartmenttherapy/react-gpt/issues/8)) ([9f143a8](https://github.com/apartmenttherapy/react-gpt/commit/9f143a8))
+* Don't setState on unmounted ad ([#5](https://github.com/apartmenttherapy/react-gpt/issues/5)) ([d7d6173](https://github.com/apartmenttherapy/react-gpt/commit/d7d6173))
+* Fix undefined function if apiNotReady ([#6](https://github.com/apartmenttherapy/react-gpt/issues/6)) ([d292947](https://github.com/apartmenttherapy/react-gpt/commit/d292947))
+* Replace hasOwnProperty with more reliable check ([#7](https://github.com/apartmenttherapy/react-gpt/issues/7)) ([d6521a7](https://github.com/apartmenttherapy/react-gpt/commit/d6521a7))
+
+
+
 <a name="2.0.1"></a>
 
 ## [2.0.1](https://github.com/nfl/react-gpt/compare/v2.0.0...v2.0.1) (2018-03-13)
