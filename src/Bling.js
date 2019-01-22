@@ -2,6 +2,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
+import {debounce} from "throttle-debounce";
 import invariant from "invariant";
 import deepEqual from "deep-equal";
 import hoistStatics from "hoist-non-react-statics";
@@ -378,6 +379,10 @@ class Bling extends Component {
             : Bling._config.viewableThreshold;
     }
 
+    _debouncedRefresh = debounce(50, () => {
+        this.refresh();
+    });
+
     componentDidMount() {
         Bling._adManager.addInstance(this);
         Bling._adManager
@@ -488,6 +493,20 @@ class Bling extends Component {
             `Ad: Failed to load gpt for ${Bling._config.seedFileUrl}`,
             err
         );
+    }
+
+    onMediaQueryChange() {
+        // Debounce refresh, since it can be called multiple times if there are
+        // multiple MQ listeners, e.g. the current screen might match
+        // `(min-width: 1024px)` AND `(min-width: 768px)`, or an MQ might change
+        // from matching to not matching, while another does the opposite.
+        // The slot should only be refreshed once per "resize" otherwise there
+        // might be unnecessary calls to GPT.
+        this._debouncedRefresh();
+        if (this.props.onMediaQueryChange) {
+            // Call for each change event
+            this.props.onMediaQueryChange(event);
+        }
     }
 
     getRenderWhenViewable(props = this.props) {

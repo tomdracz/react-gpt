@@ -173,10 +173,7 @@ export class AdManager extends EventEmitter {
 
         if (viewportWidth && this._mqls[viewportWidth]) {
             this._mqls[viewportWidth].listeners.forEach(instance => {
-                instance.refresh();
-                if (instance.props.onMediaQueryChange) {
-                    instance.props.onMediaQueryChange(event);
-                }
+                instance.onMediaQueryChange(event);
             });
         }
     };

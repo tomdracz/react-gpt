@@ -301,10 +301,13 @@ describe("createManager", () => {
             props: {
                 sizeMapping: [{viewport: [0, 0], slot: [320, 50]}]
             },
-            refresh() {}
+            onMediaQueryChange() {}
         };
 
-        const instanceRefresh = sinon.stub(instance, "refresh");
+        const instanceOnMediaQueryChange = sinon.stub(
+            instance,
+            "onMediaQueryChange"
+        );
 
         adManager.addInstance(instance);
         adManager._handleMediaQueryChange({
@@ -319,19 +322,19 @@ describe("createManager", () => {
             media: "(min-width: 0px)"
         });
 
-        expect(instanceRefresh.calledOnce).to.be.true;
+        expect(instanceOnMediaQueryChange.calledOnce).to.be.true;
 
         // IE
         adManager._handleMediaQueryChange({
             media: "all and (min-width:0px)"
         });
 
-        expect(instanceRefresh.calledTwice).to.be.true;
+        expect(instanceOnMediaQueryChange.calledTwice).to.be.true;
 
         adManager.removeInstance(instance);
 
         refresh.restore();
-        instanceRefresh.restore();
+        instanceOnMediaQueryChange.restore();
     });
 
     it("debounces render", done => {
