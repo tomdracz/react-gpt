@@ -254,7 +254,11 @@ class Bling extends Component {
         /**
          * An optional function for the filtered props and the next props to perform equality check.
          */
-        propsEqual: deepEqual
+        propsEqual: deepEqual,
+        /**
+         * An optional function to replace the pubads().refresh call. Useful for header bidding.
+         */
+        refresh: undefined
     };
 
     static on(eventType, cb) {
@@ -283,12 +287,23 @@ class Bling extends Component {
             Bling._adManager[fn](eventType, cb);
         }
     }
-
+    /**
+     * Merge and set configuration values
+     *
+     * @method configure
+     * @param {object} config
+     * @static
+     */
     static configure(config = {}) {
+        // Configure Bling
         Bling._config = {
             ...Bling._config,
             ...config
         };
+        // Configure ad manager
+        Bling._adManager.configure({
+            refresh: config.refresh
+        });
     }
     /**
      * Returns the GPT version.

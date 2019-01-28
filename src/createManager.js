@@ -48,6 +48,13 @@ export class AdManager extends EventEmitter {
         }
     }
 
+    _config = {
+        /**
+         * An optional function to replace the pubads().refresh call. Useful for header bidding.
+         */
+        refresh: undefined
+    };
+
     _adCnt = 0;
 
     _initialRender = true;
@@ -320,9 +327,13 @@ export class AdManager extends EventEmitter {
         if (!this.pubadsReady) {
             return false;
         }
-
-        // gpt already debounces refresh
-        this.googletag.pubads().refresh(slots, options);
+        if (this._config.refresh) {
+            // Call custom refresh method and bind `googletag`
+            this._config.refresh.call(this.googletag, slots, options);
+        } else {
+            // GPT already debounces refresh
+            this.googletag.pubads().refresh(slots, options);
+        }
 
         return true;
     }
@@ -465,6 +476,19 @@ export class AdManager extends EventEmitter {
             console.warn("Ad: `updateCorrelator` has been removed from GPT");
         }
         return true;
+    }
+
+    /**
+     * Merge and set configuration values
+     *
+     * @method configure
+     * @param {object} config
+     */
+    configure(config = {}) {
+        this._config = {
+            ...this._config,
+            ...config
+        };
     }
 
     load(url) {

@@ -561,6 +561,16 @@ describe("createManager", () => {
         refresh.restore();
     });
 
+    it("uses a custom refresh function", () => {
+        const refreshFn = sinon.spy();
+        adManager.configure({
+            refresh: refreshFn
+        });
+        googletag.pubadsReady = true;
+        adManager.refresh();
+        expect(refreshFn.calledOnce).to.be.true;
+    });
+
     it("clears ads", () => {
         const clear = sinon.stub(googletag.pubads(), "clear");
 
