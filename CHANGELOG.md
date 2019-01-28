@@ -1,3 +1,13 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/apartmenttherapy/react-gpt/compare/v2.0.3...v2.1.0) (2019-01-28)
+
+
+### Features
+
+* Add support for custom refresh function ([#14](https://github.com/apartmenttherapy/react-gpt/issues/14)) ([a425e5e](https://github.com/apartmenttherapy/react-gpt/commit/a425e5e))
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/apartmenttherapy/react-gpt/compare/v2.0.2...v2.0.3) (2019-01-24)
 
