@@ -353,14 +353,6 @@ export class AdManager extends EventEmitter {
             return;
         }
 
-        const checkPubadsReady = cb => {
-            if (this.pubadsReady) {
-                cb();
-            } else {
-                setTimeout(checkPubadsReady, 50, cb);
-            }
-        };
-
         const instances = this.getMountedInstances();
         let hasPubAdsService = false;
         let dummyAdSlot;
@@ -398,8 +390,8 @@ export class AdManager extends EventEmitter {
         // Enable service
         this.googletag.enableServices();
 
-        // After the service is enabled, check periodically until `pubadsReady` flag returns true before proceeding the rest.
-        checkPubadsReady(() => {
+        // Queue commands that should run once the service is ready
+        this.googletag.cmd.push(() => {
             // destroy dummy ad slot if exists.
             if (dummyAdSlot) {
                 this.googletag.destroySlots([dummyAdSlot]);
