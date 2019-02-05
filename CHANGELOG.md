@@ -1,3 +1,13 @@
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/apartmenttherapy/react-gpt/compare/v2.1.0...v2.1.1) (2019-02-05)
+
+
+### Performance Improvements
+
+* Use googletag.cmd.push instead of timeout to process queue ([#16](https://github.com/apartmenttherapy/react-gpt/issues/16)) ([5af9ce7](https://github.com/apartmenttherapy/react-gpt/commit/5af9ce7))
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/apartmenttherapy/react-gpt/compare/v2.0.3...v2.1.0) (2019-01-28)
 
