@@ -336,6 +336,16 @@ class Bling extends Component {
         Bling._adManager.syncCorrelator(value);
     }
     /**
+     * Sets a flag to indicate whether to override initial render in disableInitialLoad mode
+     *
+     * @method overrideRender
+     * @param {boolean} value
+     * @static
+     */
+    static overrideRender(value) {
+        Bling._adManager.overrideRender(value);
+    }
+    /**
      * Trigger re-rendering of all the ads.
      *
      * @method render
@@ -741,7 +751,8 @@ class Bling extends Component {
             Bling._adManager.googletag.display(divId);
             if (
                 Bling._adManager._disableInitialLoad &&
-                !Bling._adManager._initialRender
+                (!Bling._adManager._initialRender ||
+                    Bling._adManager._overrideRender)
             ) {
                 this.refresh();
             }

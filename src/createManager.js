@@ -59,6 +59,8 @@ export class AdManager extends EventEmitter {
 
     _initialRender = true;
 
+    _overrideRender = false;
+
     _syncCorrelator = false;
 
     _testMode = false;
@@ -224,6 +226,10 @@ export class AdManager extends EventEmitter {
 
     syncCorrelator(value = true) {
         this._syncCorrelator = value;
+    }
+
+    overrideRender(value = false) {
+        this._overrideRender = value;
     }
 
     generateDivId() {
