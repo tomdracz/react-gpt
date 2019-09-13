@@ -1,11 +1,15 @@
 import React, {Component} from "react";
 import {StyleRoot} from "radium";
 import {Bling as Gpt} from "react-gpt"; // eslint-disable-line import/no-unresolved
-import {canUseDOM} from "fbjs/lib/ExecutionEnvironment";
 import querystring from "querystring";
 import "../log";
 import Button from "./button";
 import styles from "./styles";
+
+const canUseDOM =
+    typeof window !== "undefined" &&
+    window.document &&
+    window.document.createElement;
 
 const qs = canUseDOM
     ? querystring.decode(window.location.search.substr(1))
